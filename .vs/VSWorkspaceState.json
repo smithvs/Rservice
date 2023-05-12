@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\RService",
+    "\\RService\\RService",
+    "\\RService\\RService\\Controllers",
+    "\\RService\\RService\\Models",
+    "\\RService\\RService\\Repositories",
+    "\\RService\\RService\\Repositories\\Interfaces"
+  ],
+  "SelectedNode": "\\RService\\RService.sln",
+  "PreviewInSolutionExplorer": false
+}

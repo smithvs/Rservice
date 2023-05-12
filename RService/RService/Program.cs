@@ -17,6 +17,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IClientRepository, ClientRepository>();
+builder.Services.AddSingleton<IOfficeRepository, OfficeRepository>();
+builder.Services.AddSingleton<IOfficeTypeRepository, OfficeTypeRepository>();
+builder.Services.AddSingleton<IRecordRepository, RecordRepository>();
+builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
+builder.Services.AddSingleton<IServiceOfficeRepository, ServiceOfficeRepository>();
+builder.Services.AddSingleton<ISpecialistRepository, SpecialistRepository>();
+builder.Services.AddSingleton<ISpecialistServiceRepository, SpecialistServiceRepository>();
 
 var app = builder.Build();
 

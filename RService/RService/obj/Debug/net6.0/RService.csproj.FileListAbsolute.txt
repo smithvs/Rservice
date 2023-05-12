@@ -30,3 +30,35 @@ C:\Users\Evraz\Documents\Visual Studio 2022\project\cs\RService\RService\RServic
 C:\Users\Evraz\Documents\Visual Studio 2022\project\cs\RService\RService\RService\obj\Debug\net6.0\RService.pdb
 C:\Users\Evraz\Documents\Visual Studio 2022\project\cs\RService\RService\RService\obj\Debug\net6.0\RService.genruntimeconfig.cache
 C:\Users\Evraz\Documents\Visual Studio 2022\project\cs\RService\RService\RService\obj\Debug\net6.0\ref\RService.dll
+D:\Rservice\RService\RService\bin\Debug\net6.0\appsettings.Development.json
+D:\Rservice\RService\RService\bin\Debug\net6.0\appsettings.json
+D:\Rservice\RService\RService\bin\Debug\net6.0\RService.exe
+D:\Rservice\RService\RService\bin\Debug\net6.0\RService.deps.json
+D:\Rservice\RService\RService\bin\Debug\net6.0\RService.runtimeconfig.json
+D:\Rservice\RService\RService\bin\Debug\net6.0\RService.dll
+D:\Rservice\RService\RService\bin\Debug\net6.0\RService.pdb
+D:\Rservice\RService\RService\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\Rservice\RService\RService\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Rservice\RService\RService\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Rservice\RService\RService\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.csproj.AssemblyReference.cache
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.GeneratedMSBuildEditorConfig.editorconfig
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.AssemblyInfoInputs.cache
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.AssemblyInfo.cs
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.csproj.CoreCompileInputs.cache
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.MvcApplicationPartsAssemblyInfo.cs
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.MvcApplicationPartsAssemblyInfo.cache
+D:\Rservice\RService\RService\obj\Debug\net6.0\staticwebassets\msbuild.RService.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Rservice\RService\RService\obj\Debug\net6.0\staticwebassets\msbuild.build.RService.props
+D:\Rservice\RService\RService\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.RService.props
+D:\Rservice\RService\RService\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.RService.props
+D:\Rservice\RService\RService\obj\Debug\net6.0\staticwebassets.pack.json
+D:\Rservice\RService\RService\obj\Debug\net6.0\staticwebassets.build.json
+D:\Rservice\RService\RService\obj\Debug\net6.0\staticwebassets.development.json
+D:\Rservice\RService\RService\obj\Debug\net6.0\scopedcss\bundle\RService.styles.css
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.csproj.CopyComplete
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.dll
+D:\Rservice\RService\RService\obj\Debug\net6.0\refint\RService.dll
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.pdb
+D:\Rservice\RService\RService\obj\Debug\net6.0\RService.genruntimeconfig.cache
+D:\Rservice\RService\RService\obj\Debug\net6.0\ref\RService.dll
