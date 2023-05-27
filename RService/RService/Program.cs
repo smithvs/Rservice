@@ -3,6 +3,8 @@ using RService.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RService.Data;
+using RService.Repositories.Interfaces;
+using RService.Repositories;
 
 var d = new Record();
 Console.WriteLine(d.DescriptionOffice );
@@ -20,6 +22,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
 
 var app = builder.Build();
 

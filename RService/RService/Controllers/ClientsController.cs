@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RService.Data;
 using RService.Models;
+using RService.Repositories;
+using RService.Repositories.Interfaces;
 
 namespace RService.Controllers
 {
@@ -16,34 +18,34 @@ namespace RService.Controllers
     {
         private readonly ILogger<ClientsController> _logger;
         private readonly RServiceContext _context;
+        private readonly IClientRepository _clientRepository;
 
-        public ClientsController(ILogger<ClientsController> logger, RServiceContext context)
+        public ClientsController(ILogger<ClientsController> logger, RServiceContext context, IClientRepository clientRepository)
         {
             _logger = logger;
             _context = context;
+            _clientRepository = clientRepository;
         }
 
         // GET: api/Clients
         [HttpGet]
-        public ActionResult<IEnumerable<Client>> GetClient()
+        public async Task<ActionResult<IEnumerable<Client>>> GetClient()
         {
-
-          if (_context.Client == null)
-          {
-              return NotFound();
-          }
-            return Ok(_context.Client);
+            try
+            {
+                return Ok(await _clientRepository.GetAsync());
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
 
         // GET: api/Clients/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Client>> GetClient(int id)
+        [HttpGet("{guid}")]
+        public async Task<ActionResult<Client>> GetClient(string guid)
         {
-          if (_context.Client == null)
-          {
-              return NotFound();
-          }
-            var client = await _context.Client.FindAsync(id);
+            var client = await _clientRepository.GetAsync(guid);
 
             if (client == null)
             {
@@ -89,34 +91,32 @@ namespace RService.Controllers
         [HttpPost]
         public async Task<ActionResult<Client>> PostClient(Client client)
         {
-          if (_context.Client == null)
-          {
-              return Problem("Entity set 'RServiceContext.Client'  is null.");
-          }
-            _context.Client.Add(client);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetClient", new { id = client.Id }, client);
+            try
+            {
+                await _clientRepository.PostAsync(client);
+                return CreatedAtAction("GetClient", new { id = client.Id }, client);
+            }
+            catch (Exception ex)
+            { 
+                return Problem(ex.Message);
+            }
+            
         }
 
         // DELETE: api/Clients/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteClient(int id)
         {
-            if (_context.Client == null)
+            try
             {
-                return NotFound();
+                await _clientRepository.DeleteAsync(id);
+                return NoContent();
             }
-            var client = await _context.Client.FindAsync(id);
-            if (client == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                return Problem(ex.Message);
             }
-
-            _context.Client.Remove(client);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            
         }
 
         private bool ClientExists(int id)

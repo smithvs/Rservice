@@ -7,8 +7,11 @@ using RService.Models;
 
 namespace RService.Data
 {
-    public class RServiceContext : DbContext
+    public partial class RServiceContext : DbContext
     {
+        public RServiceContext()
+        {
+        }
         public RServiceContext (DbContextOptions<RServiceContext> options)
             : base(options)
         {
@@ -29,5 +32,20 @@ namespace RService.Data
         public DbSet<RService.Models.Record>? Record { get; set; }
 
         public DbSet<RService.Models.Client>? Client { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=RService.Data;Trusted_Connection=True;MultipleActiveResultSets=true");
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
