@@ -6,5 +6,8 @@
         public string Name { get; set; }
         public string Telephone { get; set; }
         public string GUID { get; set; }
+
+        public ICollection<Record> Records { get; set; } = new List<Record>();
+
     }
 }

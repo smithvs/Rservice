@@ -14,5 +14,9 @@
         public string DescriptionClient { get; set; }
         public string DescriptionOffice { get; set; }
 
+        public Office Office { get; set; }
+        public Service Service { get; set; }
+        public Client Client { get; set; }
+
     }
 }

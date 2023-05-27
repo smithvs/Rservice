@@ -146,14 +146,42 @@ namespace RServiceRecordBot.Services
 
                     return new Reply("Выберите тип организации", KeyboardsService.GetCollection(officeTypes, "office_types"));
                 }
-                //if (data.Contains("my_records"))
-                //{
-                //    _userLastCommand[userGUID] = Command.Records;
+                if (data.Contains("my_records"))
+                {
+                    _userLastCommand[userGUID] = Command.Records;
 
-                //    List<MenuElement> records = await GetRecordsAsync(userGUID);
+                    List<MenuElement> records = await GetRecordsAsync(userGUID);
 
-                //    return new Reply("Выберите тип организации", KeyboardsService.GetCollection(officeTypes, "office_types"));
-                //}
+                    return new Reply("Ваши записи", KeyboardsService.GetCollection(records, "one_record"));
+                }
+                if (data.Contains("one_record"))
+                {
+                    string[] info = data.Split('=');
+                    _userLastCommand[userGUID] = Command.OneRecord;
+
+                    string record = await GetRecordInfoAsync(int.Parse(info[1]));
+
+                    return new Reply(record, KeyboardsService.CancalRecord(info[1]));
+                }
+                if (data.Contains("cancel_record"))
+                {
+                    string[] info = data.Split('=');
+                    _userLastCommand[userGUID] = Command.MainMenu;
+                    AddCommand(userGUID, Command.CancelRecord, info[1]);
+                    _userLastCommand[userGUID] = Command.MainMenu;
+                    RServiceContext _context = new RServiceContext();
+                    var record = await _context.Record.FirstOrDefaultAsync(r => r.Id == int.Parse(info[1]));
+                    if (record != null)
+                    {
+                        record.ClientId = null;
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        return new Reply("Во время выполнения произошла ошибка. Начните сначала, введя команду /start");
+                    }
+                    return new Reply("Запись успешно удалена", KeyboardsService.MainMenu);
+                }
                 if (data.Contains("office_types"))
                 {
                     string[] info = data.Split('=');
@@ -215,19 +243,38 @@ namespace RServiceRecordBot.Services
                 return new Reply("Во время выполнения произошла ошибка. Начните сначала, введя команду /start");
             }
         }
+        
 
-        //private async Task<List<MenuElement>> GetRecordsAsync(long userGUID)
-        //{
-        //    using RServiceContext _context = new RServiceContext();
-        //    var client = await _context.Client.FirstOrDefaultAsync(c => c.GUID == userGUID.ToString());
-        //    if (client != null)
-        //    {
-        //        var records = await _context.Record.Where(r => r.ClientId == client.Id).ToListAsync();
-        //        var services = await _context.Service.
-        //    }    
-            
+        private async Task<List<MenuElement>> GetRecordsAsync(long userGUID)
+        {
+            using RServiceContext _context = new RServiceContext();
+            var client = await _context.Client.FirstOrDefaultAsync(c => c.GUID == userGUID.ToString());
+            if (client != null)
+            {
+                var records = await _context.Record.Where(r => r.ClientId == client.Id).ToListAsync();
+                var services = await _context.Service.ToListAsync();
+                return records.Select(r=> new MenuElement() { Id = r.Id, Text = $"{r.Date:D} {services.First(x=>x.Id ==r.ServiceId).Name}: {r.TimeStart:t} - {r.TimeEnd:t}"}).ToList();
+            }
+            else
+            {
+                return null;
+            }
 
-        //}
+        }
+
+        private async Task<string> GetRecordInfoAsync(int id)
+        {
+            using RServiceContext _context = new RServiceContext();
+            var record = await _context.Record.FirstOrDefaultAsync(r => r.Id == id);
+            var office = await _context.Office.FirstOrDefaultAsync(o => o.Id == record.OfficeId);
+            var service = await _context.Service.FirstOrDefaultAsync(o => o.Id == record.ServiceId);
+            var text = $"Дата: {record.Date:D}" + "\n"
+                + $"Время: {record.TimeStart:t} - {record.TimeEnd:t}" + "\n"
+                + $"Услуга: {service.Name}" + "\n"
+                + $"Организация: {office.Name}" + "\n"
+                + $"Адрес: {office.Address}" + "\n";
+            return text;
+        }
 
         private async Task<List<MenuElement>> GetOfficeTypesAsync()
         {

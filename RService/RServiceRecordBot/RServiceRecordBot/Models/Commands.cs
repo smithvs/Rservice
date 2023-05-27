@@ -17,6 +17,8 @@ namespace RServiceRecordBot.Models
         SelectDate = 5,
         SelectTime = 6,
         MainMenu = 7,
-        Records = 8
+        Records = 8,
+        OneRecord = 9,
+        CancelRecord = 10
     }
 }
